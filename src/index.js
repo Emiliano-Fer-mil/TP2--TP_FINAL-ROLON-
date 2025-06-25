@@ -1,6 +1,8 @@
 import express from 'express'
-import productoRouter from './route/producto.router.js'
+import productoRouter from "./routes/producto.router.js"
+import dotenv from 'dotenv'
 
+dotenv.config()
 
 const app = express()
 const PORT = 8080

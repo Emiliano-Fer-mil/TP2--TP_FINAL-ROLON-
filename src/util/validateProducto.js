@@ -1,24 +1,21 @@
 // src/util/validateProducto.js
 
-import Joi from 'joi'
 
-const productoSchema = Joi.object({
-    id: Joi.number().integer().positive().required(),
-    nombre: Joi.string().min(6).required(),
-    oferta: Joi.string().optional(),
-    presentacion: Joi.string().required(),
-    concentracion: Joi.string().required(),
-    precio: Joi.number().positive().required(),
-    laboratorio: Joi.string().optional(),
-    fecha_vencimiento: Joi.date().iso().optional(),
-    necesita_receta: Joi.boolean().optional(),
-    imagen: Joi.string().uri().optional(),
-    descripcion: Joi.string().optional(),
-    contraindicaciones: Joi.string().optional()
-}).strict()
+import Joi from "joi";
 
-const validateProducto = (producto) =>{
-    return productoSchema.validate(producto, {abortEarly: false})
-}
+const validateProducto = Joi.object({
+  nombre: Joi.string().required(),
+  descuento: Joi.number().min(0).max(1).precision(2).optional(),
+  presentacion: Joi.string().required(),
+  concentracion: Joi.string().required(),
+  precio: Joi.number().positive().required(),
+  stock: Joi.number().integer().min(0).required(),
+  laboratorio: Joi.string().required(),
+  fecha_vencimiento: Joi.date().iso().required(),
+  necesita_receta: Joi.boolean().required(),
+  imagen: Joi.string().uri().required(),
+  descripcion: Joi.string().required(),
+  contraindicaciones: Joi.string().required()
+});
 
-export default validateProducto
+export default validateProducto;
