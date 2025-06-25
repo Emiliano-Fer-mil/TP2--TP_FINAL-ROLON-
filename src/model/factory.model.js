@@ -2,6 +2,7 @@
 
 import productoModelFs from "./DAO/producto.model.fs.js"
 import productoModelMemory from "./DAO/producto.model.memory.js"
+import productoModelMongo from "./DAO/producto.model.mongo.js"
 
 
 class factoryModel{
@@ -13,7 +14,11 @@ class factoryModel{
 
             case "mem":
                 console.log("persistencia en memoria")
-                return new productoModelMemory()    
+                return new productoModelMemory()  
+                
+            case "mongo":
+                console.log ("persistencia en Mongo Atlas CLoud")
+                return new productoModelMongo()    
         
             default:
                 console.log("persistencia por default: memoria")

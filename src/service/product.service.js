@@ -6,7 +6,7 @@ import validateProducto from "../util/validateProducto.js"
 class productService {
 
     constructor() {
-        this.model = factoryModel.get("fs")
+        this.model = factoryModel.get("mongo")
     }
 
     getProductos = async () => {
