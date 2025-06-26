@@ -1,5 +1,3 @@
-// src/util/validateProducto.js
-
 
 import Joi from "joi";
 
@@ -18,4 +16,10 @@ const validateProducto = Joi.object({
   contraindicaciones: Joi.string().required()
 });
 
-export default validateProducto;
+const validateUser = Joi.object({
+  nombre: Joi.string().required(),
+  password: Joi.string().required(),
+});
+
+
+export default {validateProducto , validateUser};

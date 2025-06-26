@@ -1,8 +1,9 @@
 import MongoConnection from "../mongoConnection.js"
+import { ObjectId } from "mongodb"
 
 
 
-class UsersModelMongo {
+class ProductoModelMongo {
     constructor() {
         this.db = MongoConnection.db
     }
@@ -17,5 +18,31 @@ class UsersModelMongo {
         return newProducto
     }
 
+     putProducto= async (id, data) => {
+       
+        const update = await this.db.collection("productos").replaceOne(
+            {_id: ObjectId.createFromHexString(id)}, data
+        )
+        return update
+    }
+ 
+    patchProducto = async (id, data) => {
+        const update = await this.db.collection("productos").updateOne(
+            {_id: ObjectId.createFromHexString(id)},
+            {$set: data}
+        )
+        return update
+    }
+
+    deleteProducto = async (id) => {
+        const productoDelete = await this.db.collection("productos").deleteOne(
+            {_id: ObjectId.createFromHexString(id)}
+        )
+        return productoDelete
+    }
+
 }
-export default UsersModelMongo
+    
+
+
+export default ProductoModelMongo

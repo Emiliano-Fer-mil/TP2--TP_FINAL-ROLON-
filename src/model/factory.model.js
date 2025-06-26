@@ -18,7 +18,8 @@ class factoryModel{
             
             case "mongo":
                 console.log("Persistiendo en MongoDB")
-                return  new productoModelMongo()
+                return  new productoModelMongo() 
+
             
         
             default:
