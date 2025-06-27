@@ -13,8 +13,13 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "chai": "^5.2.0",
     "express": "^5.1.0",
     "joi": "^17.13.3",
-    "mongodb": "^6.17.0"
+    "mocha": "^11.7.1",
+    "mongodb": "^6.17.0",
+    "supertest": "^7.1.1",
+    "swagger-ui-express": "^5.0.1",
+    "yamljs": "^0.3.0"
   }
 }
