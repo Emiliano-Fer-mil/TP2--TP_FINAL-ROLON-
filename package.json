@@ -12,6 +12,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "joi": "^17.13.3",
+    "mongodb": "^6.17.0",
+    "supertest": "^7.1.1",
+    "swagger-ui-express": "^5.0.1",
+    "yamljs": "^0.3.0"
     "bcrypt": "^6.0.0",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
