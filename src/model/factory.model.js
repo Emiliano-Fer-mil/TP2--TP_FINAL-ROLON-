@@ -14,6 +14,7 @@ class factoryModel{
 
             case "mem":
                 console.log("persistencia en memoria")
+
                 return new productoModelMemory()    
             
             case "mongo":
@@ -21,6 +22,7 @@ class factoryModel{
                 return  new productoModelMongo() 
 
             
+
         
             default:
                 console.log("persistencia por default: memoria")

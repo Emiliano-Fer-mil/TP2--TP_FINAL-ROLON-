@@ -1,3 +1,4 @@
+
 import MongoConnection from "../mongoConnection.js"
 import { ObjectId } from "mongodb"
 
@@ -46,3 +47,4 @@ class ProductoModelMongo {
 
 
 export default ProductoModelMongo
+
