@@ -13,6 +13,9 @@ class productoRouter{
     start () {
         this.router.get("/", this.controller.getProductos)
         this.router.post("/", this.controller.createProducto)
+        this.router.put("/update/all/:id", this.controller.putProducto)
+        this.router.patch("/update/:id", this.controller.patchProducto)    
+        this.router.delete("/:id", this.controller.deleteProducto)
         return this.router
     }
     

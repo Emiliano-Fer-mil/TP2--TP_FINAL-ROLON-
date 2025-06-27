@@ -36,5 +36,38 @@ class productController {
             }
         }
     }
+    putProducto = async (req, res) => {
+        const id = req.params.id
+        const data = req.body
+        const update = await this.service.putProducto(id, data)
+        if (update) {
+            res.status(200).send(update)
+        } else {
+            res.status(404).send("not found")
+        }
+    }
+    patchProducto = async (req, res) => {
+        const id = req.params.id
+        const data = req.body
+        const update = await this.service.patchProducto(id, data)
+        if (update) {
+            res.status(200).send(update)
+        } else {
+            res.status(404).send("not found")
+        }
+    }
+    deleteProducto = async (req, res) => {
+        const id = req.params.id
+        const productoDelete = await this.service.deleteProducto(id)
+        if (productoDelete) {
+            res.status(200).send(productoDelete)
+        } else {
+            res.status(404).send("not found")
+        }
+    }
+
+
+
+
 }
 export default productController

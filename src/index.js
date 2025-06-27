@@ -2,7 +2,10 @@ import express from 'express'
 import productoRouter from './route/producto.router.js'
 import YAML from 'yamljs'
 import swaggerUi from 'swagger-ui-express'
+import productoRouter from "./routes/producto.router.js"
+import userRoutes from "./routes/user.router.js"
 
+dotenv.config()
 
 const app = express()
 const swaggerDocument = YAML.load("./openapi.yaml");
@@ -10,6 +13,8 @@ const PORT = 8080
 app.use (express.json())
 app.use ("/productos", new productoRouter().start())
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use ("/usuarios", new userRoutes().start())
+
 
 
 app.use ((req,res) => {
