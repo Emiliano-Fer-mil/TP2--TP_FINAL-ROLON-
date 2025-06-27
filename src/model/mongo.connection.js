@@ -2,7 +2,7 @@ import { MongoClient } from "mongodb";
 
 let uri = "mongodb+srv://grupotp2:a1b2c3@cluster0.eocfaem.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
-class MongoConnection {
+class mongoConnection {
 
     static client = new MongoClient(uri)
     
@@ -13,4 +13,4 @@ class MongoConnection {
     }
 }
 
-export default MongoConnection
+export default mongoConnection
