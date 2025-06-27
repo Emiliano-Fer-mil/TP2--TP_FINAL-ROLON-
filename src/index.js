@@ -1,9 +1,9 @@
 import express from 'express'
-import productoRouter from './route/producto.router.js'
 import YAML from 'yamljs'
 import swaggerUi from 'swagger-ui-express'
 import productoRouter from "./routes/producto.router.js"
 import userRoutes from "./routes/user.router.js"
+import dotenv from 'dotenv'
 
 dotenv.config()
 
