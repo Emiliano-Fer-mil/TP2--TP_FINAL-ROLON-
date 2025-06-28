@@ -1,18 +1,46 @@
-// src/model/DAO/producto.model.mongo.js
-
-import mongoConnection from "../mongo.connection.js"
-//Esto me sirve para trabajar con el objeto de id de MongoDB
+import MongoConnection from "../mongoConnection.js"
 import { ObjectId } from "mongodb"
 
-class productoModelMongo {
-    constructor (){
-        this.db = mongoConnection.db
+
+
+class ProductoModelMongo {
+    constructor() {
+        this.db = MongoConnection.db
     }
-     getProductos = async () => {
+
+    getProductos = async () => {
+        const productos = await this.db.collection("productos").find({}).toArray()
+        return productos
+    }
     
-            const allProductos = await this.db.collection("productos").find({}).toArray()
-            return allProductos
-    
-        }
+    postProductos = async (productos) => {
+        const newProducto = await this.db.collection("productos").insertOne(productos)
+        return newProducto
+    }
+
+     putProducto= async (id, data) => {
+       
+        const update = await this.db.collection("productos").replaceOne(
+            {_id: ObjectId.createFromHexString(id)}, data
+        )
+        return update
+    }
+ 
+    patchProducto = async (id, data) => {
+        const update = await this.db.collection("productos").updateOne(
+            {_id: ObjectId.createFromHexString(id)},
+            {$set: data}
+        )
+        return update
+    }
+
+    deleteProducto = async (id) => {
+        const productoDelete = await this.db.collection("productos").deleteOne(
+            {_id: ObjectId.createFromHexString(id)}
+        )
+        return productoDelete
+    }
+
 }
-export default productoModelMongo
+
+export default ProductoModelMongo

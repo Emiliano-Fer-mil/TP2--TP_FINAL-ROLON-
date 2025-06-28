@@ -14,11 +14,13 @@ class factoryModel{
 
             case "mem":
                 console.log("persistencia en memoria")
-                return new productoModelMemory()  
-                
+                return new productoModelMemory()    
+            
             case "mongo":
-                console.log ("persistencia en Mongo Atlas CLoud")
-                return new productoModelMongo()    
+                console.log("Persistiendo en MongoDB")
+                return  new productoModelMongo() 
+
+            
         
             default:
                 console.log("persistencia por default: memoria")
