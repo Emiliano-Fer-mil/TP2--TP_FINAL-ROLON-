@@ -1,4 +1,4 @@
-import validation from "../util/validateProducto.js";
+import {validateUser} from "../util/validateProducto.js";
 import factoryModel from "../model/factory.user.model.js";
 import bcrypt from "bcrypt";
 
@@ -12,7 +12,7 @@ class UsersService {
     }
   
   createUsuario = async (usuario) => {
-  const { error } = validation.validateUser.validate(usuario, { abortEarly: false });
+  const { error } = validateUser.validate(usuario, { abortEarly: false });
 
   if (error) {
     const err = new Error("error de validación");
@@ -52,8 +52,8 @@ class UsersService {
         const userDelete = await this.model.deleteUsers(id);
         return userDelete;
     }
-    getUserByNombre = async (nombre) => {
-        const user = await this.model.getUserByNombre(nombre);
+    getUserByNombre = async (username) => {
+        const user = await this.model.getUserByNombre(username);
         return user;
     }
     

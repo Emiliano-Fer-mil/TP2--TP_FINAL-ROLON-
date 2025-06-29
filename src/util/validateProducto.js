@@ -1,7 +1,7 @@
 
 import Joi from "joi";
 
-const validateProducto = Joi.object({
+export const validateProducto = Joi.object({
   nombre: Joi.string().required(),
   descuento: Joi.number().min(0).max(1).precision(2).optional(),
   presentacion: Joi.string().required(),
@@ -16,10 +16,10 @@ const validateProducto = Joi.object({
   contraindicaciones: Joi.string().required()
 });
 
-const validateUser = Joi.object({
-  nombre: Joi.string().required(),
+export const validateUser = Joi.object({
+  username: Joi.string().required(),
   password: Joi.string().required(),
+  rol: Joi.string().valid("cliente", "admin").required()
 });
 
 
-export default {validateProducto , validateUser};

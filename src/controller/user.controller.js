@@ -10,10 +10,10 @@ class UsersController {
    
 
 loginUser = async (req, res) => {
-  const { nombre, password } = req.body;
+  const { username, password } = req.body;
 
   try {
-    const user = await this.service.getUserByNombre(nombre); 
+    const user = await this.service.getUserByNombre(username); 
     if (!user) {
       return res.status(401).json({ message: "Usuario no encontrado" });
     }

@@ -1,6 +1,6 @@
 // src/controller/producto.controller.js
 
-import productService from "../service/product.service.js";
+import productService from "../service/producto.service.js";
 
 class productController {
     constructor() { this.service = new productService() }
@@ -32,7 +32,8 @@ class productController {
                 console.error("Error interno:", error)
                 res.status(500).json({
                     mensaje: "Error interno del servidor",
-                    detalle: process.env.NODE_ENV === "development" ? error.message : undefined})
+                    detalle: process.env.NODE_ENV === "development" ? error.message : undefined
+                })
             }
         }
     }

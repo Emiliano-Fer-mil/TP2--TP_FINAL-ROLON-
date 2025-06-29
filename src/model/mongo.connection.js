@@ -1,12 +1,14 @@
 import { MongoClient } from "mongodb";
-
-let uri = "mongodb+srv://grupotp2:a1b2c3@cluster0.eocfaem.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+import dotenv from 'dotenv'
+dotenv.config()
+let uri = process.env.BASE_EMI_URI;
+let client = process.env.BASE_EMI_CLIENT
 
 class mongoConnection {
 
     static client = new MongoClient(uri)
     
-    static db = this.client.db("tp2")
+    static db = this.client.db(client)
 
     static connection = async () => {
         await this.client.connect()
