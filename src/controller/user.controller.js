@@ -7,31 +7,19 @@ class UsersController {
         this.service = new UsersService()
     }
     
-   
-
 loginUser = async (req, res) => {
   const { nombre, password } = req.body;
 
   try {
-    const user = await this.service.getUserByNombre(nombre); 
-    if (!user) {
-      return res.status(401).json({ message: "Usuario no encontrado" });
-    }
-
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(401).json({ message: "Contraseña incorrecta", password});
-    }
-
-    const token = await authMiddleware.generateToken(user);
-    res.cookie("token", token, { httpOnly: true }); 
-
+    const { user, token } = await this.service.loginUser(nombre, password);
+    res.cookie("token", token);
     res.json({ message: "Inicio de sesión exitoso", user });
   } catch (error) {
     console.error("Error en login:", error);
-    res.status(500).json({ message: "Error interno del servidor" });
+    res.status(error.codigo || 500).json({ message: error.message || "Error interno del servidor" });
   }
 };
+
 
 
    createUsuario = async (req, res) => {
@@ -39,6 +27,7 @@ loginUser = async (req, res) => {
         try {
             const postedUsuario = await this.service.createUsuario(usuario)
             res.status(201).send(postedUsuario)
+           
         } catch (error) {
 
 
@@ -61,9 +50,6 @@ loginUser = async (req, res) => {
         const allusers = await this.service.getUsers()
         res.send(allusers)
     }
-
-    
-    
 
     putUsers = async (req, res) => {
         const { id } = req.params
