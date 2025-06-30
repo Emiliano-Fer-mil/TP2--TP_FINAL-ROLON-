@@ -13,7 +13,7 @@ class productService {
   };
 
   createProducto = async (producto) => {
-  const { error } = validateProducto.validate(producto, { abortEarly: false });
+  const { error } = validateProducto.validateProducto.validate(producto, { abortEarly: false });
 
   if (error) {
     const err = new Error("error de validación");
