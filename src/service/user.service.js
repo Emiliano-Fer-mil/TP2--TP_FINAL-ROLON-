@@ -1,6 +1,7 @@
-import validation from "../util/validateProducto.js";
+import {validateUser} from "../util/validateProducto.js";
 import factoryModel from "../model/factory.user.model.js";
 import bcrypt from "bcrypt";
+import { sendWelcomeEmail } from "../util/mailer.js";
 
 class UsersService {
     constructor() {
@@ -12,7 +13,7 @@ class UsersService {
     }
   
   createUsuario = async (usuario) => {
-  const { error } = validation.validateUser.validate(usuario, { abortEarly: false });
+  const { error } = validateUser.validate(usuario, { abortEarly: false });
 
   if (error) {
     const err = new Error("error de validación");
@@ -28,6 +29,9 @@ class UsersService {
   usuario.password = hashedPassword;
 
   const postUsers = await this.model.postUsers(usuario);
+
+  await sendWelcomeEmail(usuario.email, usuario.username);
+  
   return postUsers;
 };
 
@@ -52,8 +56,8 @@ class UsersService {
         const userDelete = await this.model.deleteUsers(id);
         return userDelete;
     }
-    getUserByNombre = async (nombre) => {
-        const user = await this.model.getUserByNombre(nombre);
+    getUserByNombre = async (username) => {
+        const user = await this.model.getUserByNombre(username);
         return user;
     }
     

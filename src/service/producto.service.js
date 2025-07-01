@@ -1,6 +1,6 @@
 // src/service/product.service.js
 import factoryModel from "../model/factory.model.js";
-import validateProducto from "../util/validateProducto.js";
+import {validateProducto} from "../util/validateProducto.js";
 
 class productService {
   constructor() {
@@ -25,7 +25,7 @@ class productService {
     throw err;
   }
 
-  const postProducto = await this.model.postProductos(producto);
+  const postProducto = await this.model.postProducto(producto);
   return postProducto;
 };
 

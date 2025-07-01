@@ -1,12 +1,12 @@
-
 import MongoConnection from "../mongoConnection.js"
+import mongoConnection from "../mongo.connection.js"
 import { ObjectId } from "mongodb"
 
 
 
 class ProductoModelMongo {
     constructor() {
-        this.db = MongoConnection.db
+        this.db = mongoConnection.db
     }
 
     getProductos = async () => {
@@ -14,8 +14,9 @@ class ProductoModelMongo {
         return productos
     }
     
-    postProductos = async (productos) => {
+    postProducto = async (productos) => {
         const newProducto = await this.db.collection("productos").insertOne(productos)
+        //console.log (newProducto)
         return newProducto
     }
 
@@ -43,8 +44,5 @@ class ProductoModelMongo {
     }
 
 }
-    
-
 
 export default ProductoModelMongo
-

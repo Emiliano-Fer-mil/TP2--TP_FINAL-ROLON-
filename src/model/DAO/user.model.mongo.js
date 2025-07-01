@@ -1,9 +1,10 @@
 import MongoConnection from "../mongoConnection.js"
+import mongoConnection from "../mongo.connection.js"
 import { ObjectId } from "mongodb"
 
 class UsersModelMongo {
     constructor() {
-        this.db = MongoConnection.db
+        this.db = mongoConnection.db
     }
 
     loginUser = async (nombre, password) => {
@@ -44,8 +45,8 @@ class UsersModelMongo {
    
     }
 
-    getUserByNombre = async (nombre) => {
-        const user = await this.db.collection("usuarios").findOne({ nombre })
+    getUserByNombre = async (username) => {
+        const user = await this.db.collection("usuarios").findOne({ username })
         return user
     }
 

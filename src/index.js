@@ -19,8 +19,8 @@ app.use ("/usuarios", new userRoutes().start())
 
 app.use ((req,res) => {
     res.status(404).json({
-        code: 400,
-        message: 'recurso no'
+        code: 404,
+        message: 'recurso no encontrado'
     })
 })
 
