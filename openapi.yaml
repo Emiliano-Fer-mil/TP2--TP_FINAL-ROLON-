@@ -1,0 +1,333 @@
+components:
+  schemas:
+    Producto:
+      properties:
+        _id:
+          example: 60f7c8f5b4d2a45f8cfa1234
+          type: string
+        disponible:
+          example: true
+          type: boolean
+        nombre:
+          example: Cámara DSLR
+          type: string
+        precio:
+          example: 499.99
+          format: float
+          type: number
+      required:
+      - _id
+      - nombre
+      - precio
+      - disponible
+      type: object
+    ProductoCreate: &id001
+      properties:
+        _id:
+          example: 685b580cf46accfb6381e2f4
+          type: string
+        concentracion:
+          example: 10 mg
+          type: string
+        contraindicaciones:
+          example: No usar en caso de hipersensibilidad a la cetirizina o a cualquiera
+            de los excipientes.
+          type: string
+        descripcion:
+          example: Antihistamínico utilizado para aliviar síntomas de alergia como
+            estornudos, picazón y secreción nasal.
+          type: string
+        descuento:
+          example: 0.1
+          format: float
+          type: number
+        fecha_vencimiento:
+          example: '2026-12-31'
+          format: date
+          type: string
+        imagen:
+          example: https://www.lasanteca.com/userfiles/2018/12/CETIRIZINA-10MG-CAJA-POR-10-TABLETAS-CON-BLISTER.jpg
+          format: uri
+          type: string
+        laboratorio:
+          example: Laboratorio Farmacéutico S.A.
+          type: string
+        necesita_receta:
+          example: false
+          type: boolean
+        nombre:
+          example: Cetirizina
+          type: string
+        precio:
+          example: 300
+          type: number
+        presentacion:
+          example: Tabletas
+          type: string
+        stock:
+          example: 362
+          type: integer
+      required:
+      - _id
+      - nombre
+      - descuento
+      - presentacion
+      - concentracion
+      - precio
+      - stock
+      - laboratorio
+      - fecha_vencimiento
+      - necesita_receta
+      - imagen
+      - descripcion
+      - contraindicaciones
+      type: object
+    ProductoUpdate: *id001
+    User:
+      properties:
+        _id:
+          type: string
+        nombre:
+          type: string
+        password:
+          type: string
+      required:
+      - _id
+      - nombre
+      - password
+      type: object
+    UserCreate:
+      properties:
+        nombre:
+          type: string
+        password:
+          type: string
+      required:
+      - nombre
+      - password
+      type: object
+    UserLogin:
+      properties:
+        nombre:
+          type: string
+        password:
+          type: string
+      required:
+      - nombre
+      - password
+      type: object
+    UserUpdate:
+      properties:
+        nombre:
+          type: string
+        password:
+          type: string
+      type: object
+info:
+  description: API para gestionar productos y usuarios con autenticación básica y
+    CRUD completo.
+  title: API de Productos y Usuarios
+  version: 1.0.0
+openapi: 3.0.0
+paths:
+  /productos:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Producto'
+                type: array
+          description: Lista de productos obtenida
+        '204':
+          description: Sin contenido
+      summary: Obtener lista de productos
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductoCreate'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Producto'
+          description: Producto creado
+      summary: Crear un nuevo producto
+  /productos/update/all/{id}:
+    put:
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductoUpdate'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Producto'
+          description: Producto actualizado
+        '404':
+          description: Producto no encontrado
+      summary: Reemplazar un producto existente
+  /productos/update/{id}:
+    patch:
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductoUpdate'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Producto'
+          description: Producto actualizado parcialmente
+        '404':
+          description: Producto no encontrado
+      summary: Actualizar parcialmente un producto
+  /productos/{id}:
+    delete:
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Producto eliminado
+        '404':
+          description: Producto no encontrado
+      summary: Eliminar un producto por ID
+  /usuarios:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/User'
+                type: array
+          description: Lista de usuarios obtenida
+      summary: Obtener lista de usuarios
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Usuario creado
+      summary: Crear un nuevo usuario
+  /usuarios/login:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Inicio de sesión exitoso
+        '401':
+          description: Credenciales incorrectas
+      summary: Iniciar sesión de un usuario
+  /usuarios/update/all/{id}:
+    put:
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdate'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Usuario actualizado
+        '404':
+          description: Usuario no encontrado
+      summary: Reemplazar un usuario existente
+  /usuarios/update/{id}:
+    patch:
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdate'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Usuario actualizado parcialmente
+        '404':
+          description: Usuario no encontrado
+      summary: Actualizar parcialmente un usuario
+  /usuarios/{id}:
+    delete:
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Usuario eliminado
+        '404':
+          description: Usuario no encontrado
+      summary: Eliminar un usuario por ID
+servers:
+- description: Servidor local de desarrollo
+  url: http://localhost:8080

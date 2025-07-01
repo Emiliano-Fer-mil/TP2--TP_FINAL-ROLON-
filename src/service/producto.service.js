@@ -43,6 +43,8 @@ class productService {
     const productoDelete = await this.model.deleteProducto(id);
     return productoDelete;
   };
+
+  
 }
 
 export default productService;
