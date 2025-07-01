@@ -12,7 +12,7 @@ const swaggerDocument = YAML.load("./openapi.yaml");
 const PORT = 8080
 app.use (express.json())
 app.use ("/productos", new productoRouter().start())
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api-documentacion", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use ("/usuarios", new userRoutes().start())
 
 
