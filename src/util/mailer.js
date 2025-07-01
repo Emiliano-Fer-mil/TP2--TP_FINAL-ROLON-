@@ -8,13 +8,13 @@ export const sendWelcomeEmail = async (to, username) => {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: user, // tu correo Gmail
-        pass: pass // contraseña de aplicación
+        user: user, 
+        pass: pass 
       },
     });
 
     const mailOptions = {
-      from: `"Mi App 👨‍💻" <${process.env.EMAIL_USER}>`,
+      from: `"Farmacity 24/7" <${process.env.EMAIL_USER}>`,
       to,
       subject: '¡Bienvenido a la plataforma!',
       text: `Hola ${username}, gracias por registrarte.`,
