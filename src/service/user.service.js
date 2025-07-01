@@ -1,6 +1,7 @@
 import {validateUser} from "../util/validateProducto.js";
 import factoryModel from "../model/factory.user.model.js";
 import bcrypt from "bcrypt";
+import { sendWelcomeEmail } from "../util/mailer.js";
 
 class UsersService {
     constructor() {
@@ -28,6 +29,9 @@ class UsersService {
   usuario.password = hashedPassword;
 
   const postUsers = await this.model.postUsers(usuario);
+
+  await sendWelcomeEmail(usuario.email, usuario.username);
+  
   return postUsers;
 };
 

@@ -19,6 +19,7 @@ export const validateProducto = Joi.object({
 export const validateUser = Joi.object({
   username: Joi.string().required(),
   password: Joi.string().required(),
+  email: Joi.string().email().required(),
   rol: Joi.string().valid("cliente", "admin").required()
 });
 

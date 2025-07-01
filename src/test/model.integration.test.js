@@ -36,6 +36,7 @@ describe("Test entidad producto", () => {
         const cookieHeader = response.headers["set-cookie"];
         expect(cookieHeader).to.exist;
         expect(cookieHeader[0]).to.include("token=");
+        console.log(cookieHeader)
 
         // Guardar cookie para siguientes tests
         token = cookieHeader[0];
