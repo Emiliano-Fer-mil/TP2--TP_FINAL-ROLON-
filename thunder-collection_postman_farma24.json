@@ -1,26 +1,78 @@
 {
     "info": {
-        "_postman_id": "b48609a6-b499-4601-806f-62fb094a0392",
-        "name": "farma24",
+        "_postman_id": "91d9ba20-0ab3-4c78-b24a-d9069727161a",
+        "name": "Far24Back",
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
         "description": ""
     },
     "item": [
         {
-            "name": "getPedido",
+            "name": "logginUser",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "http://localhost:8080/usuarios/login",
+                    "path": [
+                        "usuarios",
+                        "login"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080"
+                },
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"nombre\":\"abelardo2\",\n  \"password\":\"1234\"\n}\n"
+                }
+            }
+        },
+        {
+            "name": "postUser",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "http://localhost:8080/usuarios/",
+                    "path": [
+                        "usuarios"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080"
+                },
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"username\":\"abelardo3\",\n  \"password\":\"1234\",\n  \"email\":\"emilianofernandezmilki@gmail.com\",\n  \"rol\": \"admin\"\n}"
+                }
+            }
+        },
+        {
+            "name": "getProductos",
             "request": {
                 "method": "GET",
                 "url": {
-                    "raw": "https://683656cf664e72d28e407eab.mockapi.io/pedidos",
+                    "raw": "http://localhost:8080/productos/",
                     "path": [
-                        "pedidos"
+                        "productos"
                     ],
-                    "protocol": "https",
+                    "protocol": "http",
                     "host": [
-                        "683656cf664e72d28e407eab",
-                        "mockapi",
-                        "io"
-                    ]
+                        "localhost"
+                    ],
+                    "port": "8080"
                 }
             }
         },
@@ -29,16 +81,15 @@
             "request": {
                 "method": "POST",
                 "url": {
-                    "raw": "https://683656cf664e72d28e407eab.mockapi.io/stock",
+                    "raw": "http://localhost:8080/productos/",
                     "path": [
-                        "stock"
+                        "productos"
                     ],
-                    "protocol": "https",
+                    "protocol": "http",
                     "host": [
-                        "683656cf664e72d28e407eab",
-                        "mockapi",
-                        "io"
-                    ]
+                        "localhost"
+                    ],
+                    "port": "8080"
                 },
                 "body": {
                     "mode": "raw",
@@ -47,26 +98,26 @@
                             "language": "json"
                         }
                     },
-                    "raw": "{\r\n    \"id\": 3,\r\n    \"nombre\": \"Amoxicilina\",\r\n    \"descuento\": 0,\r\n    \"presentacion\": \"Cápsulas\",\r\n    \"concentracion\": \"500 mg\",\r\n    \"precio\": 300,\r\n    \"stock\": 75,\r\n    \"laboratorio\": \"Laboratorios Genéricos S.A.\",\r\n    \"fecha_vencimiento\": \"2025-11-15\",\r\n    \"necesita_receta\": true,\r\n    \"imagen\": \"https://medisol.com.ar/wp-content/uploads/2023/10/medisol-amoxol-500-mg-comprimidos-recubiertos-10.jpg\",\r\n    \"descripcion\": \"Antibiótico utilizado para tratar infecciones bacterianas.\",\r\n    \"contraindicaciones\": \"No usar en caso de alergia a la penicilina o a cualquiera de los excipientes.\"\r\n  }"
+                    "raw": "{\n    \"nombre\": \"Amoxicilina\",\n    \"descuento\": 0,\n    \"presentacion\": \"Cápsulas\",\n    \"concentracion\": \"500 mg\",\n    \"precio\": 300,\n    \"stock\": 498,\n    \"laboratorio\": \"Laboratorios Genéricos S.A.\",\n    \"fecha_vencimiento\": \"2025-11-15\",\n    \"necesita_receta\": true,\n    \"imagen\": \"https://medisol.com.ar/wp-content/uploads/2023/10/medisol-amoxol-500-mg-comprimidos-recubiertos-10.jpg\",\n    \"descripcion\": \"Antibiótico utilizado para tratar infecciones bacterianas.\",\n    \"contraindicaciones\": \"No usar en caso de alergia a la penicilina o a cualquiera de los excipientes.\"\n  }"
                 }
             }
         },
         {
-            "name": "putProduct",
+            "name": "patchProducto",
             "request": {
-                "method": "PUT",
+                "method": "PATCH",
                 "url": {
-                    "raw": "https://683656cf664e72d28e407eab.mockapi.io/stock/1",
+                    "raw": "http://localhost:8080/productos/update/6860a1532f88a5dec675545b",
                     "path": [
-                        "stock",
-                        "1"
+                        "productos",
+                        "update",
+                        "6860a1532f88a5dec675545b"
                     ],
-                    "protocol": "https",
+                    "protocol": "http",
                     "host": [
-                        "683656cf664e72d28e407eab",
-                        "mockapi",
-                        "io"
-                    ]
+                        "localhost"
+                    ],
+                    "port": "8080"
                 },
                 "body": {
                     "mode": "raw",
@@ -75,7 +126,68 @@
                             "language": "json"
                         }
                     },
-                    "raw": "{\r\n    \"nombre\": \"Cetirizina\",\r\n    \r\n    \"concentracion\": \"10 mg\",\r\n    \"precio\": 300,\r\n    \r\n    \"imagen\": \"https://www.lasanteca.com/userfiles/2018/12/CETIRIZINA-10MG-CAJA-POR-10-TABLETAS-CON-BLISTER.jpg\",\r\n    \"descripcion\": \"Antihistamínico utilizado para aliviar síntomas de alergia como estornudos, picazón y secreción nasal.\",\r\n    \"contraindicaciones\": \"No usar en caso de hipersensibilidad a la cetirizina o a cualquiera de los excipientes.\"\r\n  }"
+                    "raw": "{\"nombre\" : \"milonga\"}"
+                }
+            }
+        },
+        {
+            "name": "postProducto Error",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "http://localhost:8080/productos/",
+                    "path": [
+                        "productos"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080"
+                },
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n    \"nombre\": 200,\n    \"descuento\": 0,\n    \"presentacion\": \"Cápsulas\",\n    \"concentracion\": \"500 mg\",\n    \"precio\": \"300\",\n    \"stock\": 498,\n    \"laboratorio\": \"Laboratorios Genéricos S.A.\",\n    \"fecha_vencimiento\": 20251678,\n    \"necesita_receta\": true,\n    \"imagen\": \"https://medisol.com.ar/wp-content/uploads/2023/10/medisol-amoxol-500-mg-comprimidos-recubiertos-10.jpg\",\n    \"descripcion\": \"Antibiótico utilizado para tratar infecciones bacterianas.\",\n    \"contraindicaciones\": \"No usar en caso de alergia a la penicilina o a cualquiera de los excipientes.\"\n  }"
+                }
+            }
+        },
+        {
+            "name": "getUsersAll",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:8080/usuarios/",
+                    "path": [
+                        "usuarios"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080"
+                }
+            }
+        },
+        {
+            "name": "deleteUser",
+            "request": {
+                "method": "DELETE",
+                "url": {
+                    "raw": "http://localhost:8080/usuarios/6862c3c38fe9ab89bd26993c",
+                    "path": [
+                        "usuarios",
+                        "6862c3c38fe9ab89bd26993c"
+                    ],
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080"
                 }
             }
         }
