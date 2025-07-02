@@ -25,6 +25,16 @@ class UsersService {
     throw err;
   }
 
+const existingByName = await this.getUserByNombre(usuario.username);
+  const existingByEmail = await this.getUserByEmail(usuario.email);
+
+  if (existingByName || existingByEmail) {
+    const err = new Error("nombre de usuario o email ya existe");
+    err.codigo = 409;
+    err.mensaje = "nombre de usuario o email ya existe";
+    throw err;
+  }
+
   const hashedPassword = await bcrypt.hash(usuario.password, 10);
   usuario.password = hashedPassword;
 
@@ -61,8 +71,13 @@ class UsersService {
         return user;
     }
     
+    getUserByEmail = async (email) => {
+        const user = await this.model.getUserByEmail(email);
+        return user;
+    }
 
-
+ 
+    
     
 
 }

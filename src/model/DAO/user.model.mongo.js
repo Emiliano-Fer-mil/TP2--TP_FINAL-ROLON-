@@ -45,8 +45,17 @@ class UsersModelMongo {
    
     }
 
+    
     getUserByNombre = async (username) => {
         const user = await this.db.collection("usuarios").findOne({ username })
+        return user
+    }
+
+     
+
+
+getUserByEmail = async (email) => {
+        const user = await this.db.collection("usuarios").findOne({ email })
         return user
     }
 

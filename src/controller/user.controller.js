@@ -48,6 +48,10 @@ loginUser = async (req, res) => {
                     mensaje: error.mensaje || "error de validación",
                     errores: error.detalles
                 })
+                } else if (error.codigo === 409) {
+                res.status(409).json({
+                    mensaje: error.mensaje
+                })
             } else {
                 console.error("Error interno:", error)
                 res.status(500).json({

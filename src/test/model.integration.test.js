@@ -162,5 +162,37 @@ describe("Test entidad producto", () => {
         expect(response.body).to.be.a("array").that.has.length.of.at.least(1)
     })
 
+let conflictUser = {
+        username: "dupuser",
+        password: "1234",
+        email: "dup@example.com",
+        rol: "cliente"
+    }
+
+    it("USER CREATE for conflict tests", async () => {
+        const response = await url.post("/usuarios/").send(conflictUser)
+        expect(response.status).to.equal(201)
+    })
+
+    it("USER POST conflict username", async () => {
+        const response = await url.post("/usuarios/").send({
+            username: conflictUser.username,
+            password: "1234",
+            email: "dup2@example.com",
+            rol: "cliente"
+        })
+        expect(response.status).to.equal(409)
+    })
+
+    it("USER POST conflict email", async () => {
+        const response = await url.post("/usuarios/").send({
+            username: "dupuser2",
+            password: "1234",
+            email: conflictUser.email,
+            rol: "cliente"
+        })
+        expect(response.status).to.equal(409)
+    })
+
 
 })
